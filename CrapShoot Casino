@@ -1,0 +1,32 @@
+import random
+
+def roll_dice():
+    return random.randint(1, 6), random.randint(1, 6)
+
+def play_craps():
+    input("Welcome to CrapShoot by Terrance McMahon ! Press Enter to roll the dice...\n")
+    
+    first_roll = sum(roll_dice())
+
+    if first_roll in [7, 11]:
+        print(f"You rolled {first_roll}. You win!")
+    elif first_roll in [2, 3, 12]:
+        print(f"You rolled {first_roll}. You lose!")
+    else:
+        print(f"You rolled {first_roll}. Point is set to {first_roll}.")
+        point = first_roll
+
+        while True:
+            input("Press Enter to roll the dice...\n")
+            roll = sum(roll_dice())
+            print(f"You rolled {roll}.")
+
+            if roll == point:
+                print(f"Congratulations! You rolled your point ({point}). You win!")
+                break
+            elif roll == 7:
+                print("Oh no! You rolled a 7. You lose!")
+                break
+
+if __name__ == "__main__":
+    play_craps()

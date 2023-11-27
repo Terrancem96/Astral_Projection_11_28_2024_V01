@@ -32,6 +32,7 @@ def play_craps():
             balance -= bet
         else:
             print(f"You rolled {first_roll}. Point is set to {first_roll}.")
+            point = first_roll
 
             while True:
                 input("Press Enter to roll the dice...\n")

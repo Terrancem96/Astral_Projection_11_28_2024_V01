@@ -1,0 +1,55 @@
+import random
+
+def roll_dice():
+    return random.randint(1, 6), random.randint(1, 6)
+
+def place_bet(balance):
+    while True:
+        try:
+            bet = int(input(f"Current Balance: ${balance}\nPlace your bet: $"))
+            if 1 <= bet <= balance:
+                return bet
+            else:
+                print("Invalid bet. Please enter a valid amount.")
+        except ValueError:
+            print("Invalid input. Please enter a valid number.")
+
+def play_craps():
+    balance = 1000
+    print("Welcome to Craps!\n")
+
+    while balance > 0:
+        input("Press Enter to roll the dice and start a new round...\n")
+
+        bet = place_bet(balance)
+        first_roll = sum(roll_dice())
+
+        if first_roll in [7, 11]:
+            print(f"You rolled {first_roll}. You win ${bet}!")
+            balance += bet
+        elif first_roll in [2, 3, 12]:
+            print(f"You rolled {first_roll}. You lose ${bet}.")
+            balance -= bet
+        else:
+            print(f"You rolled {first_roll}. Point is set to {first_roll}.")
+
+            while True:
+                input("Press Enter to roll the dice...\n")
+                roll = sum(roll_dice())
+                print(f"You rolled {roll}.")
+
+                if roll == point:
+                    print(f"Congratulations! You rolled your point ({point}). You win ${bet}!")
+                    balance += bet
+                    break
+                elif roll == 7:
+                    print(f"Oh no! You rolled a 7. You lose ${bet}.")
+                    balance -= bet
+                    break
+
+        print(f"Current Balance: ${balance}\n")
+
+    print("Game over! You're out of money.")
+
+if __name__ == "__main__":
+    play_craps()
